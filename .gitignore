@@ -1,3 +1,4 @@
-.dotty-ide-artifact
-.dotty-ide.json
+.bloop
+.metals
+.vscode
 target/

@@ -1,9 +1,9 @@
 import org.lwjgl.Version.getVersion
 import org.lwjgl.glfw.GLFWErrorCallback.createPrint
 import org.lwjgl.glfw.Callbacks.glfwFreeCallbacks
-import org.lwjgl.glfw.GLFW._
+import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.opengl.GL
-import org.lwjgl.opengl.GL11._
+import org.lwjgl.opengl.GL11.*
 import org.lwjgl.system.MemoryStack.stackPush
 import org.lwjgl.system.MemoryUtil.NULL
 import scala.util.Using
@@ -36,17 +36,23 @@ private def init(): Window =
 
   // Configure GLFW.
   glfwDefaultWindowHints() // optional, the current window hints are already the default
-  glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE) // the window will stay hidden after creation
+  glfwWindowHint(
+    GLFW_VISIBLE,
+    GLFW_FALSE
+  ) // the window will stay hidden after creation
   glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE) // the window will be resizable
 
   // Create the window.
   val window: Window = glfwCreateWindow(300, 300, "Hello World!", NULL, NULL)
-  if window == NULL then throw RuntimeException("Failed to create the GLFW window")
+  if window == NULL then
+    throw RuntimeException("Failed to create the GLFW window")
 
   // Setup a key callback. It will be called every time a key is pressed, repeated or released.
-  glfwSetKeyCallback(window, (window, key, scancode, action, mods) =>
-    if key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE then
-      glfwSetWindowShouldClose(window, true)
+  glfwSetKeyCallback(
+    window,
+    (window, key, scancode, action, mods) =>
+      if key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE then
+        glfwSetWindowShouldClose(window, true)
   )
 
   // Get the thread stack and push a new frame.
